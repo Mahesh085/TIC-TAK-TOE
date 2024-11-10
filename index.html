@@ -18,6 +18,10 @@
     .container {
       text-align: center;
     }
+    h1 {
+      margin-bottom: 20px;
+      font-size: 2em;
+    }
     .game-board {
       display: grid;
       grid-template-columns: repeat(3, 100px);
@@ -70,6 +74,7 @@
 </head>
 <body>
   <div class="container">
+    <h1>Tic Tac Toe</h1>
     <div class="game-board" id="gameBoard">
       <div class="cell" data-index="0"></div>
       <div class="cell" data-index="1"></div>
@@ -106,7 +111,7 @@
     function handleCellPlayed(clickedCell, index) {
       board[index] = currentPlayer;
       clickedCell.innerHTML = currentPlayer;
-      clickedCell.classList.add(currentPlayer);  // Add a class based on the player (X or O)
+      clickedCell.classList.add(currentPlayer);
     }
 
     function handlePlayerChange() {
@@ -162,8 +167,4 @@
       });
     }
 
-    gameBoard.addEventListener('click', handleCellClick);
-    statusDisplay.innerHTML = `Player ${currentPlayer}'s turn`;
-  </script>
-</body>
-</html>
+    gameBoard.addEventListener('
