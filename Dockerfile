@@ -1,4 +1,5 @@
-FROM nginx:alpine
+FROM nginx
 MAINTAINER Author Uma Mahesh
 LABEL this is just a basic game.
-COPY index.html /usr/share/nginx/html/index.html
+EXPOSE 80
+COPY index.html /usr/share/nginx/html/
