@@ -10,12 +10,22 @@
       align-items: center;
       justify-content: center;
       height: 100vh;
-      font-family: Arial, sans-serif;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: #fff;
+      margin: 0;
+    }
+    .container {
+      text-align: center;
     }
     .game-board {
       display: grid;
       grid-template-columns: repeat(3, 100px);
-      gap: 5px;
+      gap: 10px;
+      background: #333;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
     }
     .cell {
       width: 100px;
@@ -23,19 +33,43 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2em;
+      font-size: 2.5em;
       cursor: pointer;
-      border: 2px solid #333;
-      user-select: none;
+      background: #444;
+      color: #fff;
+      border-radius: 10px;
+      transition: background 0.2s;
     }
+    .cell:hover {
+      background: #666;
+    }
+    .cell.X { color: #ff5e5e; }  /* Red color for player X */
+    .cell.O { color: #57e389; }  /* Green color for player O */
     .status {
       margin-top: 20px;
-      font-size: 1.2em;
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1em;
+      font-weight: bold;
+      color: #333;
+      background: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3);
+      transition: all 0.2s;
+    }
+    button:hover {
+      background: #e6e6e6;
     }
   </style>
 </head>
 <body>
-  <div>
+  <div class="container">
     <div class="game-board" id="gameBoard">
       <div class="cell" data-index="0"></div>
       <div class="cell" data-index="1"></div>
@@ -47,7 +81,7 @@
       <div class="cell" data-index="7"></div>
       <div class="cell" data-index="8"></div>
     </div>
-    <div class="status" id="status"></div>
+    <div class="status" id="status">Player X's turn</div>
     <button onclick="resetGame()">Reset Game</button>
   </div>
 
@@ -72,6 +106,7 @@
     function handleCellPlayed(clickedCell, index) {
       board[index] = currentPlayer;
       clickedCell.innerHTML = currentPlayer;
+      clickedCell.classList.add(currentPlayer);  // Add a class based on the player (X or O)
     }
 
     function handlePlayerChange() {
@@ -121,7 +156,10 @@
       currentPlayer = "X";
       gameActive = true;
       statusDisplay.innerHTML = `Player ${currentPlayer}'s turn`;
-      document.querySelectorAll('.cell').forEach(cell => (cell.innerHTML = ""));
+      document.querySelectorAll('.cell').forEach(cell => {
+        cell.innerHTML = "";
+        cell.classList.remove("X", "O");
+      });
     }
 
     gameBoard.addEventListener('click', handleCellClick);
